@@ -10,8 +10,11 @@ namespace Altseed2.Boids
             var config = new Configuration();
             config.ConsoleLoggingEnabled = true;
             config.ToolEnabled = true;
+            config.WaitVSync = false;
 
             Engine.Initialize("Boids", 800, 600, config);
+
+            Engine.TargetFPS = 2000.0f;
 
             var param = new BoidsParameter
             {
@@ -20,6 +23,7 @@ namespace Altseed2.Boids
                 Alignment = 30.0f,
                 Cohesion = 0.2f,
                 Wall = 0.001f,
+                Mouse = 1.0f,
             };
 
             Engine.AddNode(new Boids(param));
@@ -33,6 +37,7 @@ namespace Altseed2.Boids
                     float alignment = param.Alignment;
                     float cohesion = param.Cohesion;
                     float wall = param.Wall;
+                    float mouse = param.Mouse;
 
                     Engine.Tool.Text($"FPS:{Engine.CurrentFPS}");
                     if (Engine.Tool.InputFloat("Speed", ref speed)) { param.Speed = speed; }
@@ -40,6 +45,7 @@ namespace Altseed2.Boids
                     if (Engine.Tool.InputFloat("Alignment", ref alignment)) { param.Alignment = alignment; }
                     if (Engine.Tool.InputFloat("Cohesion", ref cohesion)) { param.Cohesion = cohesion; }
                     if (Engine.Tool.InputFloat("Wall", ref wall)) { param.Wall = wall; }
+                    if (Engine.Tool.InputFloat("Mouse", ref mouse)) { param.Mouse = mouse; }
                     Engine.Tool.End();
                 }
 
